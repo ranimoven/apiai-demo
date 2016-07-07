@@ -1,0 +1,18 @@
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+@import "../www/lib/ionic/scss";
+ion-view,.pane,.view {
+	background-color: #D1E3EC;
+}
+
+body.platform-ios {
+	font-family: Montserrat, sans-serif;
+}
+
+.ionic-body.platform-ios {
+	font-family: Montserrat, sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.tab-item,input,button,select,textarea {
+	font-family: inherit;
+}
+

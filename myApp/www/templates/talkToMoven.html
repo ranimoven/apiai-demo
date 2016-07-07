@@ -1,0 +1,18 @@
+<ion-view title="Talk to Moven!" id="page3" class=" ">
+    <ion-content padding="true" class="has-header">
+        <form id="talkToMoven-form4" class="list ">
+            <p id="talkToMoven-markdown1" style="color:#729ACC;font-size:13px;text-align:center;" class=" ">Hey there! I'm
+                <strong>Moven</strong>. You can talk to me about all your banking needs, from your
+                <strong>balances</strong> to your
+                <strong>recent activity</strong> and
+                <strong>upcoming expenses</strong>. I'll respond with advice and information. Get started by typing below.</p>
+            <label class="item item-input " id="talkToMoven-input6">
+                <input type="text" ng-model="queryVal"  placeholder="ie, &quot;What's my balance?&quot;">
+            </label>
+            <button ng-click="sendToBot(queryVal)"
+                    id="talkToMoven-button3" class=" button button-positive  button-block button-outline ">Send to MovenBot</button>
+            <p><strong>Moven says:</strong> {{ botResponse }}</p>
+
+        </form>
+    </ion-content>
+</ion-view>
