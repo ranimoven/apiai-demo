@@ -20,22 +20,23 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
       StatusBar.styleDefault();
     }
   });
+  $ionicPlatform.ready(function() {
+    ApiAIPlugin.init(
+      {
+        clientAccessToken: "721090d2c2694ab4a3d49369e0cd5d04", // insert your client access key here
+        lang: "en" // set lang tag from list of supported languages
+      },
+      function() {
 
-  /*ApiAIPlugin.init(
-    {
-      clientAccessToken: "721090d2c2694ab4a3d49369e0cd5d04", // insert your client access key here
-      lang: "en" // set lang tag from list of supported languages
-    },
-    function(result) {
+        alert("init success :)")
 
-      alert("init success :)")
+      },
+      function(error) {
+        alert("init error \n" + error)
+      }
+    );
+  });
 
-    },
-    function(error) {
-      "init error"
-    }
-  );
-*/
 
 
 })
