@@ -15,11 +15,6 @@ angular.module('app.controllers', [])
   $scope.volume="0%";
   console.log($scope.queryModel.text);
 
-
-  $scope.$on("$ionicView.afterEnter",function(){
-    console.log("AFTER enter");
-
-  });
   $scope.sendToBot = function(){
       console.log("TEXT IS : " + $scope.queryModel.text);
 
@@ -39,45 +34,41 @@ angular.module('app.controllers', [])
 
   };
 
+
+  $scope.startHello = function(){
+    console.log("hello is asked");
+    ApiAIPlugin.requestText({
+      query: "hello"
+    },
+    function (response) {
+      $scope.botResponse = JSON.stringify(response['result']['fulfillment']['speech']);
+      $timeout(function(){
+        //$scope.queryModel.text = "";
+      }, 1000);
+
+    },
+    function (error) {
+      alert("Error!\n" + error);
+    });
+  };
+
+
   $scope.voiceRequest = function() {
     $scope.progressVal = "starting";
-    try {
-      ApiAIPlugin.requestVoice({},
-        function (response) {
-          $scope.voiceReply = JSON.stringify(response['result']['speech']);
-          $timeout(function(){
-            $scope.speakText(JSON.stringify(response['result']['speech']));
-            $scope.progressVal = "done";
-          }, 1000);
-
-        },
-        function (error) {
-          alert("Error!\n" + error);
-        });
-      ApiAIPlugin.levelMeterCallback(function(level) {
-        console.log("LISTENING to voice:" + level);
-        $scope.progressVal="recording..."
-        // add visualization code here
-      });
-    } catch(e){
-      alert(e);
-    }
-
-  }
-
-  /*$scope.voiceRequest = function() {
-    ApiAIPlugin.requestVoice({ },
+    ApiAIPlugin.requestVoice({},
       function (response) {
-        $scope.voiceReply = "got a result" + JSON.stringify(response['result']);
-        //$scope.speakText($scope.voiceReply);
-        console.log('received request');
-        alert(JSON.stringify(response));
+        console.log(JSON.stringify(response['result']['resolvedQuery']));
+        $timeout(function () {
+          $scope.voiceReply = JSON.stringify(response['result']['fulfillment']['speech']);
+          $scope.speakText($scope.voiceReply);
+        }, 1000);
       },
       function (error) {
-        console.log(error);
         alert("Error!\n" + error);
       });
-  }*/
+  };
+
+
 
   $scope.speakText = function(inputText){
     TTS
@@ -89,7 +80,7 @@ angular.module('app.controllers', [])
       }, function (reason) {
         alert(reason);
       });
-  }
+  };
 
 
 }]);
